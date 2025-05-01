@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Placement</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background:linear-gradient(to right, #141e30, #243b55);
+        }
+
+        .navbar {
+            background: linear-gradient(to right, #fca3b7, #fcdcc9);
+          }
+      
+          .navbar .nav-link {
+            font-weight: 500;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 10px;
+            padding: 8px 15px;
+          }
+      
+          .navbar .nav-link:hover {
+            background-color: #ff9a76;
+            color: white !important;
+          }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .form-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #343a40;
+        }
+
+        .btn-danger {
+            background: linear-gradient(to right, #f85032, #e73827);
+            border: none;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-danger:hover {
+            transform: scale(1.05);
+        }
+
+        .result-container {
+            background: #343a40;
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        label {
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">HR Performance</a>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="/index"><i class="bi bi-house-door"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="/job"><i class="bi bi-briefcase"></i> Recruitment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="/ana"><i class="bi bi-bar-chart"></i> Dashboard</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<!-- Form Section -->
+<div class="container form-container">
+    <h2 class="form-title">Employee Requirement Form</h2>
+    <form action="/placement" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="sl_no">Serial Number</label>
+                <input type="number" class="form-control" id="sl_no" name="sl_no">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="gender">Gender</label>
+                <select class="form-control" id="gender" name="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="ssc_p">SSC Percentage</label>
+                <input type="number" class="form-control" id="ssc_p" name="ssc_p" step="0.01" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="hsc_p">HSC Percentage</label>
+                <input type="number" class="form-control" id="hsc_p" name="hsc_p" step="0.01" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="degree_p">Degree Percentage</label>
+                <input type="number" class="form-control" id="degree_p" name="degree_p" step="0.01" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="workex">Work Experience</label>
+                <select class="form-control" id="workex" name="workex">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="etest_p">ETest Percentage</label>
+                <input type="number" class="form-control" id="etest_p" name="etest_p" step="0.01" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="specialisation">Specialization</label>
+                <select class="form-control" id="specialisation" name="specialisation" required>
+                    <option value="Mkt&HR">Mkt&HR</option>
+                    <option value="Mkt&Fin">Mkt&Fin</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="mba_p">MBA Percentage</label>
+                <input type="number" class="form-control" id="mba_p" name="mba_p" step="0.01" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-danger btn-block btn-lg mt-4">Predict</button>
+    </form>
+</div>
+
+<!-- Result Section -->
+{% if result %}
+<div class="container result-container text-center">
+    <h1>{{ result }}</h1>
+    <h4>{{ rec }}</h4>
+</div>
+{% endif %}
+
+<!-- Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

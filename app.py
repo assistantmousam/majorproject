@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
+
 # ======================================Create app=================================================
 app = Flask(__name__)
 
